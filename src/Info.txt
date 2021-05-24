@@ -1,0 +1,37 @@
+WebSocket
+  1)Provides real-time Persistent communication between server & client
+  2)Provides FULL-DUPLEX Communication == Bi-directional  Server <---> Client
+  3)Different protocal from HTTP 
+
+To integrate Socket.io in our project we must -
+  1)Include it in our Server-side
+  2)Include it in our Client-side
+  Summary of the work of socketio server
+  server(emit) -> clients(listens) -> countUpdate
+  clients(emit) -> server(listens) -> increment
+
+Emitting vs Broadcasting vs Join
+  1) socket.emit('msg','Welcome') = Emits the event 'msg' for the particular Client-Server connection(or socket connection) ONLY.
+  2) io.emit('msg','Welcome') = Emits the event 'msg' for all the active connections with the Server including the client-server connection(or socket connection) making the call.
+  3) socket.broadcast.emit('msg','Welcome') = Emits to all active connections except the client-server connection(or socket connection) making the call.
+  4)socket.join(room) = Joins a 'room'
+  5)socket.to
+  6)io.to(room).emit('msg','Welcome') = Sends to all client connected to server in a particular room. 
+  7)socket.broadcast.to(room).emit('msg','Welcome') = Emits to all active connections in a 'room' except the client-server connection(or socket connection) making the call.
+
+Acknowledgement
+  1) Client(event) --> Server(listens) --> Acknowledgement -->Client
+  2) Server(event) --> Client(listens) --> Acknowledgement -->Server
+
+
+Timestamp in JS
+  1) Date() - in-built in JS
+  2) While emitting multiple values via an event, there are 2 option
+    i)Sending more than one argument on the emit()
+      Eg- socket.emit('messageEvent',message,timestamp)
+    ii)Sending all the arguments in a single object
+      Eg - socket.emit('messageEvent',{
+        message,
+        timestamp
+      })
+  3) moment.js - For handling timestamp related function
